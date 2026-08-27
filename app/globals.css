@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-mist;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    font-feature-settings: "ss01" on, "cv01" on;
+  }
+
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+
+  :focus-visible {
+    outline: 2px solid #050505;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-graphite;
+  }
+
+  .marquee-group:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Swiss-style corner registration marks used to frame key sections */
+  .corner-ticks {
+    position: relative;
+  }
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-top: 1px solid currentColor;
+    border-left: 1px solid currentColor;
+    top: 0;
+    left: 0;
+    opacity: 0.35;
+  }
+  .corner-ticks::after {
+    left: auto;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
